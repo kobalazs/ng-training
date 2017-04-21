@@ -1,3 +1,16 @@
-<p>
-  registration works!
-</p>
+<h3>Registration</h3>
+<pre>{{user|json}}</pre>
+<form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input name="name" type="text" class="form-control" [(ngModel)]="user.name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input name="email" type="text" class="form-control" [(ngModel)]="user.email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input name="password" type="password" class="form-control" [(ngModel)]="user.password">
+  </div>
+</form>
