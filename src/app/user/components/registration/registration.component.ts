@@ -29,6 +29,10 @@ export class RegistrationComponent implements OnInit {
     //
   }
 
+  public register() {
+    console.log('Register user:', this.user);
+  }
+
   public static passwordMatchValidator(g: FormGroup) {
     return g.get('password').value === g.get('passwordConfirm').value ? null : {'mismatch': true};
   }
