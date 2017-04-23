@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<h3>Log In</h3>
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input formControlName="email" type="text" class="form-control" [(ngModel)]="user.email">
+    <div *ngIf="!form.controls.email.valid && !form.controls.email.pristine " class="alert alert-danger">
+      Valid email is required!
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input formControlName="password" type="password" class="form-control" [(ngModel)]="user.password">
+    <div *ngIf="!form.controls.password.valid && !form.controls.password.pristine " class="alert alert-danger">
+      Password is required and should be at least 6 characters long!
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Log In</button>
+</form>
