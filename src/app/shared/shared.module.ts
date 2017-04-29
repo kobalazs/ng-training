@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
   NotFoundComponent,
   NavigationComponent,
+  ApiService,
   AuthService,
   AuthGuard
 } from './shared.barrel';
@@ -23,6 +24,7 @@ import {
     NavigationComponent
   ],
   providers: [
+    ApiService,
     AuthService,
     AuthGuard
   ]
