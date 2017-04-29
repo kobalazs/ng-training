@@ -40,7 +40,7 @@ export class ApiService {
       },
       error => {
         let responseJson = error.json();
-        if (responseJson['error'] in ['token_expired', 'token_invalid', 'token_not_provided']) {
+        if (['token_expired', 'token_invalid', 'token_not_provided'].indexOf(responseJson['error']) !== -1) {
           this._authService.logout();
           return;
         }
