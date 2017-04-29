@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import {
   NotFoundComponent,
   NavigationComponent,
-  AuthService
+  AuthService,
+  AuthGuard
 } from './shared.barrel';
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
     NavigationComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ]
 })
 export class SharedModule { }
