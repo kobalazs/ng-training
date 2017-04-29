@@ -1,5 +1,7 @@
 <h3>My Tasks</h3>
 <ul>
-  <li *ngFor="let task of tasks">{{task.name}}</li>
+  <li *ngFor="let task of tasks">
+    <input [(ngModel)]="task.name" (blur)="updateTask(task)">
+  </li>
 </ul>
 <button type="button" class="btn btn-default" (click)="addNewTask()">Add New Task</button>
