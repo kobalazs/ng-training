@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   TaskRoutingModule,
-  TaskListComponent
+  TaskListComponent,
+  TaskService
 } from './task.barrel';
 
 @NgModule({
@@ -12,6 +13,9 @@ import {
   ],
   declarations: [
     TaskListComponent
+  ],
+  providers: [
+    TaskService
   ]
 })
 export class TaskModule { }
