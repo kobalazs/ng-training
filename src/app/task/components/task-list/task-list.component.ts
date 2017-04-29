@@ -18,9 +18,24 @@ export class TaskListComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this._loadTasks();
+  }
+
+  private _loadTasks() {
     this._taskService.list({
       success: response => this.tasks = response
     });
+  }
+
+  public addNewTask() {
+    let task = new Task();
+    task.name = 'New Task';
+    this._taskService.create(
+      task,
+      {
+        finally: () => this._loadTasks()
+      }
+    )
   }
 
 }

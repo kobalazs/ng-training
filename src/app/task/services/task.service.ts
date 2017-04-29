@@ -22,4 +22,15 @@ export class TaskService {
     );
   }
 
+  public create(task: Task, responseConfig: ApiResponseConfig): void {
+    this._apiService.request(
+      {
+        method: 'Post',
+        url: 'task',
+        body: task
+      },
+      responseConfig
+    )
+  }
+
 }
