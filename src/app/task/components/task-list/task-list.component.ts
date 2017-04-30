@@ -12,6 +12,7 @@ import {
 })
 export class TaskListComponent implements OnInit {
   public tasks: Task[];
+  public loading: boolean;
 
   public constructor(private _taskService: TaskService) {
     //
@@ -22,12 +23,15 @@ export class TaskListComponent implements OnInit {
   }
 
   private _loadTasks() {
+    this.loading = true;
     this._taskService.list({
-      success: response => this.tasks = response
+      success: response => this.tasks = response,
+      finally: () => this.loading = false
     });
   }
 
   public addNewTask() {
+    this.loading = true;
     let task = new Task();
     task.name = 'New Task';
     this._taskService.create(
@@ -39,10 +43,14 @@ export class TaskListComponent implements OnInit {
   }
 
   public updateTask(task: Task) {
+    this.loading = true;
     this._taskService.update(
       task,
       {
-        success: updatedTask => task = updatedTask,
+        success: updatedTask => {
+          task = updatedTask;
+          this.loading = false;
+        },
         error: error => this._loadTasks()
       }
     )

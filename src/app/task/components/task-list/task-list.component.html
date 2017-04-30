@@ -1,7 +1,8 @@
 <h3>My Tasks</h3>
 <ul>
   <li *ngFor="let task of tasks">
-    <input [(ngModel)]="task.name" (blur)="updateTask(task)">
+    <input [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading">
+    <img *ngIf="loading" src="assets/loader.gif">
   </li>
 </ul>
-<button type="button" class="btn btn-default" (click)="addNewTask()">Add New Task</button>
+<button type="button" class="btn btn-default" (click)="addNewTask()" [disabled]="loading">Add New Task</button>
