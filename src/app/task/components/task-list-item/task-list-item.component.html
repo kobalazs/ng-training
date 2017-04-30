@@ -1,2 +1,3 @@
+<input type="checkbox" [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled">
 <input type="text" [(ngModel)]="task.name" (change)="updateTask(task)" [disabled]="loading || disabled">
 <img *ngIf="loading" src="assets/loader.gif">
