@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {
   TaskRoutingModule,
   TaskListComponent,
+  TaskListItemComponent,
   TaskService
 } from './task.barrel';
 
@@ -14,7 +15,8 @@ import {
     TaskRoutingModule
   ],
   declarations: [
-    TaskListComponent
+    TaskListComponent,
+    TaskListItemComponent
   ],
   providers: [
     TaskService

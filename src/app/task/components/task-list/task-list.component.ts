@@ -12,17 +12,17 @@ import {
 })
 export class TaskListComponent implements OnInit {
   public tasks: Task[];
-  public loading: boolean;
+  public loading: boolean = true;
 
   public constructor(private _taskService: TaskService) {
     //
   }
 
   public ngOnInit() {
-    this._loadTasks();
+    this.loadTasks();
   }
 
-  private _loadTasks() {
+  public loadTasks() {
     this.loading = true;
     this._taskService.list({
       success: response => this.tasks = response,
@@ -37,21 +37,7 @@ export class TaskListComponent implements OnInit {
     this._taskService.create(
       task,
       {
-        finally: () => this._loadTasks()
-      }
-    )
-  }
-
-  public updateTask(task: Task) {
-    this.loading = true;
-    this._taskService.update(
-      task,
-      {
-        success: updatedTask => {
-          task = updatedTask;
-          this.loading = false;
-        },
-        error: error => this._loadTasks()
+        finally: () => this.loadTasks()
       }
     )
   }
