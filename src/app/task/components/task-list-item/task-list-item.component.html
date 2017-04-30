@@ -1,2 +1,2 @@
-<input [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading">
+<input type="text" [(ngModel)]="task.name" (change)="updateTask(task)" [disabled]="loading || disabled">
 <img *ngIf="loading" src="assets/loader.gif">

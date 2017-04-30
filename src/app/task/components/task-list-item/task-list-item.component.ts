@@ -12,6 +12,7 @@ import {
 })
 export class TaskListItemComponent implements OnInit {
   public loading: boolean;
+  @Input() public disabled: boolean;
   @Input() public task: Task;
   @Output() public onError = new EventEmitter();
 
