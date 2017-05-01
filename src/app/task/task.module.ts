@@ -5,7 +5,8 @@ import {
   TaskRoutingModule,
   TaskListComponent,
   TaskListItemComponent,
-  TaskService
+  TaskService,
+  AgePipe
 } from './task.barrel';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {
   ],
   declarations: [
     TaskListComponent,
-    TaskListItemComponent
+    TaskListItemComponent,
+    AgePipe
   ],
   providers: [
     TaskService
