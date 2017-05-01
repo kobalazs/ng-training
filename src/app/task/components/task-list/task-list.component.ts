@@ -42,4 +42,11 @@ export class TaskListComponent implements OnInit {
     )
   }
 
+  public removeTask(task: Task) {
+    let index: number = this.tasks.indexOf(task);
+    if (index !== -1) {
+      this.tasks.splice(index, 1);
+    }
+  }
+
 }

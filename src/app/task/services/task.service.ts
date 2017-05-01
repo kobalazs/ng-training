@@ -44,4 +44,14 @@ export class TaskService {
     )
   }
 
+  public delete(task: Task, responseConfig: ApiResponseConfig): void {
+    this._apiService.request(
+      {
+        method: 'Delete',
+        url: 'task/' + task.id
+      },
+      responseConfig
+    );
+  }
+
 }
