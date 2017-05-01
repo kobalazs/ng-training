@@ -4,6 +4,9 @@ import {
   Task,
   TaskService
 } from '../../task.barrel';
+import {
+  Timekeeper
+} from '../../../shared/shared.barrel';
 
 @Component({
   selector: 'app-task-list-item',
@@ -12,27 +15,18 @@ import {
 })
 export class TaskListItemComponent implements OnInit {
   public loading: boolean;
-  public now: number;
+  @Timekeeper() public now: number;
   @Input() public disabled: boolean;
   @Input() public task: Task;
   @Output() public onError = new EventEmitter();
   @Output() public onDelete = new EventEmitter<Task>();
-
-  private _timekeeper: any;
 
   public constructor(private _taskService: TaskService) {
     //
   }
 
   public ngOnInit() {
-    this.now = this._getGmtTime();
-    this._timekeeper = setInterval(() => {
-      this.now = this._getGmtTime();
-    }, 1000);
-  }
-
-  public ngOnDestroy() {
-    clearInterval(this._timekeeper);
+    //
   }
 
   public updateTask(task: Task) {
@@ -60,10 +54,6 @@ export class TaskListItemComponent implements OnInit {
         finally: () => this.loading = false
       }
     )
-  }
-
-  private _getGmtTime(): number {
-    return Date.now() + (new Date()).getTimezoneOffset() * 60 * 1000
   }
 
 }

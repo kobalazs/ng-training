@@ -1,3 +1,6 @@
+// Decorators
+export * from './decorators/timekeeper.decorator';
+
 // Services
 export * from './services/auth.service';
 export * from './services/api.service';
