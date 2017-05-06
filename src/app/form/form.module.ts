@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormComponent } from './components/form/form.component';
-import { FieldComponent } from './components/field/field.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { FormComponent, FieldComponent } from './form.barrel';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [FormComponent, FieldComponent]
+  exports: [
+    FormComponent
+  ],
+  declarations: [
+    FormComponent,
+    FieldComponent
+  ]
 })
 export class FormModule { }

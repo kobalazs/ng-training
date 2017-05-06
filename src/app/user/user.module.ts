@@ -8,13 +8,17 @@ import {
   RegistrationComponent,
   UserService
 } from './user.barrel';
+import {
+  FormModule
+} from '../form/form.barrel';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    FormModule
   ],
   declarations: [
     LoginComponent,

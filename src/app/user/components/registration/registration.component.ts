@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Response } from '@angular/http';
 
 import { User, UserService } from '../../user.barrel';
+import { Form } from '../../../form/form.barrel';
 
 @Component({
   selector: 'app-registration',
@@ -12,16 +13,30 @@ import { User, UserService } from '../../user.barrel';
 export class RegistrationComponent implements OnInit {
   public loading: boolean = true;
   public user: User = new User();
-  public form = new FormGroup(
-    {
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    },
-    RegistrationComponent.passwordMatchValidator
-  );
-
+  public passwordConfirm: string;
+  public form = new Form({
+    fields: [
+      {
+        name: 'email', type: 'text', label: 'Email',
+        model: this.user.email, validators: [Validators.required, Validators.email]
+      },
+      {
+        name: 'name', type: 'text', label: 'Name',
+        model: this.user.email, validators: [Validators.required]
+      },
+      {
+        name: 'password', type: 'password', label: 'Password',
+        model: this.user.email, validators: [Validators.required, Validators.minLength(6)]
+      },
+      {
+        name: 'passwordConfirm', type: 'password', label: 'Password (confirm)',
+        model: this.passwordConfirm, validators: [Validators.required, Validators.minLength(6)]
+      }
+    ],
+    validator: RegistrationComponent.passwordMatchValidator,
+    onSubmit: () => this.register()
+  });
+  
   public constructor(private _userService: UserService) {
     //
   }

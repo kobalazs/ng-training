@@ -5,3 +5,6 @@ export * from './components/field/field.component';
 // Models
 export * from './models/form';
 export * from './models/field';
+
+// Module
+export * from './form.module';

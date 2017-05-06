@@ -1,3 +1,8 @@
 <form [formGroup]="form.formGroup" (ngSubmit)="onSubmit()">
-  <field *ngFor="let field of form.fields" [field]="field" (change)="onFieldChange($event)"></field>
+  <app-field
+    *ngFor="let field of form.fields"
+    [field]="field"
+    [formGroup]="form.formGroup"
+    (change)="onFieldChange($event)"
+  ></app-field>
 </form>

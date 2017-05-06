@@ -1,6 +1,16 @@
 import { ValidatorFn, FormControl } from '@angular/forms';
 
-export class Field {
+export interface FieldConfig {
+    label: string;
+    type?: string;
+    name: string;
+    model: any;
+    defaultValue?: any;
+    validators?: ValidatorFn[];
+    options?: any[];
+}
+
+export class Field implements FieldConfig {
     public label: string;
     public type: string;
     public name: string;
@@ -12,7 +22,7 @@ export class Field {
     public formControl: FormControl;
     public errorMessage: string;
 
-    public constructor(config: Field) {
+    public constructor(config: FieldConfig) {
         this.label = config.label;
         this.type = config.type;
         this.name = config.name;
@@ -29,6 +39,8 @@ export class Field {
     }
 
     public validate() {
+        this.formControl.updateValueAndValidity({ onlySelf: false, emitEvent: false });
+        
         if (!this.formControl.dirty || this.formControl.valid) {
             this.errorMessage = undefined;
         } else {

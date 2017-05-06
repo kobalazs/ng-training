@@ -1,7 +1,14 @@
-import { Field } from '../form.barrel';
+import { Field, FieldConfig } from '../form.barrel';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
-export class Form { 
+export interface FormConfig {
+    fields: FieldConfig[];
+    onSubmit?: () => void;
+    onReset?: () => void;
+    validator?: (formGroup: FormGroup) => null | any;
+}
+
+export class Form implements FormConfig { 
     public fields: Field[];
     public onSubmit: () => void;
     public onReset: () => void;
@@ -9,13 +16,20 @@ export class Form {
 
     public formGroup: FormGroup;
 
-    public constructor(config: Form) {
-        this.fields = config.fields;
+    public constructor(config: FormConfig) {
+        this.fields = [];
+        for (let fieldConfig of config.fields) {
+            this.fields.push(new Field(fieldConfig));
+        }
         this.onSubmit = config.onSubmit;
         this.onReset = config.onReset;
         this.validator = config.validator;
 
         this._composeFormGroup();
+    }
+
+    public reset() {
+        this.formGroup.reset();
     }
 
     private _composeFormGroup() {

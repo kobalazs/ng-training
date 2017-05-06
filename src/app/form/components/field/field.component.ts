@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { Field } from '../../form.barrel';
 
@@ -10,6 +11,7 @@ import { Field } from '../../form.barrel';
 export class FieldComponent implements OnInit {
 
   @Input() public field: Field;
+  @Input() public formGroup: FormGroup;
   @Output() public change = new EventEmitter<Field>();
 
   public constructor() {
@@ -21,8 +23,8 @@ export class FieldComponent implements OnInit {
   }
 
   public onModelChange(model: any) {
-    this.field.validate();
     this.change.emit(this.field);
+    window.setTimeout(() => this.field.validate(), 0);
   }
 
 }
