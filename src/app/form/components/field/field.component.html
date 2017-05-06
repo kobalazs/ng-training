@@ -1,3 +1,63 @@
-<p>
-  field works!
-</p>
+<fieldset class="form-group" [ngSwitch]="field.type" [formGroup]="formGroup">
+
+    <input *ngSwitchCase="'hidden'" type="hidden"
+    formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+
+    <label *ngSwitchCase="'textarea'">
+        {{field.label}}
+        <textarea class="form-control form-control-sm"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)"></textarea>
+    </label>
+
+    <label *ngSwitchCase="'checkbox'">
+        <input type="checkbox"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+        {{field.label}}
+    </label>
+
+    <label *ngSwitchCase="'select'">
+        {{field.label}}
+        <select class="form-control form-control-sm"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+            <option *ngFor="let option of field.options; let i = index" value="{{option.value}}">{{option.name}}</option>
+        </select>
+    </label>
+
+    <label *ngSwitchCase="'multi-select'">
+        {{field.label}}
+        <select class="form-control form-control-sm" multiple size="{{field.options.length}}"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+            <option *ngFor="let option of field.options; let i = index" [value]="option.value">{{option.name}}</option>
+        </select>
+    </label>
+
+    <label *ngSwitchCase="'checkbox-group'">
+        {{field.label}}
+        <label *ngFor="let option of field.options; let i = index">
+            <input type="checkbox"
+            formControlName="{{field.name}}" [(ngModel)]="field.model[option.name]">
+            {{option.name}}
+        </label>
+    </label>
+
+    <label *ngSwitchCase="'number'">
+        {{field.label}}
+        <input type="number" class="form-control form-control-sm"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+    </label>
+
+    <label *ngSwitchCase="'date'">
+        {{field.label}}
+        <input type="date" class="form-control form-control-sm" max="9999-12-31"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+    </label>
+
+    <label *ngSwitchDefault>
+        {{field.label}}
+        <input type="text" class="form-control form-control-sm"
+        formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
+    </label>
+
+    <div *ngIf="false" class="alert alert-danger" [innerHtml]="''"></div>
+
+</fieldset>
