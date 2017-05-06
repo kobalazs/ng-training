@@ -20,4 +20,9 @@ export class FieldComponent implements OnInit {
     //
   }
 
+  public onModelChange(model: any) {
+    this.field.validate();
+    this.change.emit(this.field);
+  }
+
 }

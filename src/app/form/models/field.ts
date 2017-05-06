@@ -10,6 +10,7 @@ export class Field {
     public options: any[];
 
     public formControl: FormControl;
+    public errorMessage: string;
 
     public constructor(config: Field) {
         this.label = config.label;
@@ -25,5 +26,17 @@ export class Field {
 
     private _composeFormControl() {
         this.formControl = new FormControl(this.defaultValue, this.validators);
+    }
+
+    public validate() {
+        if (!this.formControl.dirty || this.formControl.valid) {
+            this.errorMessage = undefined;
+        } else {
+            let errors: string[] = [];
+            for (const errorKey in this.formControl.errors) {
+                errors.push(errorKey);
+            }
+            this.errorMessage = errors.join('<br>');
+        }
     }
 }

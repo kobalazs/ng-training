@@ -58,6 +58,6 @@
         formControlName="{{field.name}}" [(ngModel)]="field.model" (ngModelChange)="onModelChange($event)">
     </label>
 
-    <div *ngIf="false" class="alert alert-danger" [innerHtml]="''"></div>
+    <div *ngIf="!!field.errorMessage" class="alert alert-danger" [innerHtml]="field.errorMessage"></div>
 
 </fieldset>
