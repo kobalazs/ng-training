@@ -1,4 +1,4 @@
-<form [formGroup]="form.formGroup" (ngSubmit)="onSubmit()" (ngReset)="onReset()">
+<form [formGroup]="form.formGroup" (ngSubmit)="onSubmit()">
   <app-field
     *ngFor="let field of form.fields"
     [field]="field"
@@ -9,5 +9,5 @@
     Invalid field values!
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!form.formGroup.valid">Register</button>
-  <button type="reset" class="btn btn-default">Reset</button>
+  <button type="reset" class="btn btn-default" (click)="onReset()">Reset</button>
 </form>

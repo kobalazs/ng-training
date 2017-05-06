@@ -33,8 +33,7 @@ export class RegistrationComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(6)]
       }
     ],
-    validator: RegistrationComponent.passwordMatchValidator,
-    onSubmit: () => this.register()
+    validator: RegistrationComponent.passwordMatchValidator
   });
   
   public constructor(private _userService: UserService) {

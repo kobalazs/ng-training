@@ -23,12 +23,20 @@ export class FormComponent implements OnInit {
   }
 
   public onFieldChange(field: Field) {
-    console.log(`Field "${field.name}" has changed.`);
-    this.change.emit(this.form);
+    if (field instanceof Field) {
+      console.log(`Field "${field.name}" has changed.`);
+      this.change.emit(this.form);
+    }
   }
 
   public onSubmit() {
+    this.submit.emit(this.form);
     console.log(`Form has been submitted.`);
+  }
+
+  public onReset() {
+    this.reset.emit(this.form);
+    console.log(`Form has been reset.`);
   }
 
 }

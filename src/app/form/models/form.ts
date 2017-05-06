@@ -4,8 +4,6 @@ import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 export interface FormConfig {
     model: any;
     fields: FieldConfig[];
-    onSubmit?: () => void;
-    onReset?: () => void;
     validator?: (formGroup: FormGroup) => null | any;
 }
 
@@ -24,8 +22,6 @@ export class Form implements FormConfig {
         for (let fieldConfig of config.fields) {
             this.fields.push(new Field(fieldConfig, this.model));
         }
-        this.onSubmit = config.onSubmit;
-        this.onReset = config.onReset;
         this.validator = config.validator;
 
         this._composeFormGroup();
