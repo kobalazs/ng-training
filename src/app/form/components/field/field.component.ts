@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Field } from '../../form.barrel';
 
@@ -10,7 +10,7 @@ import { Field } from '../../form.barrel';
 export class FieldComponent implements OnInit {
 
   @Input() public field: Field;
-  @Output() public change: () => Field;
+  @Output() public change = new EventEmitter<Field>();
 
   public constructor() {
     //

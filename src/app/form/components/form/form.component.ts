@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Form } from '../../form.barrel';
+import { Form, Field } from '../../form.barrel';
 
 @Component({
   selector: 'app-form',
@@ -10,9 +10,9 @@ import { Form } from '../../form.barrel';
 export class FormComponent implements OnInit {
 
   @Input() public form: Form;
-  @Output() public submit: () => Form;
-  @Output() public reset: () => Form;
-  @Output() public change: () => Form;
+  @Output() public submit = new EventEmitter<Form>();
+  @Output() public reset = new EventEmitter<Form>();
+  @Output() public change = new EventEmitter<Form>();
 
   public constructor() {
     //
@@ -20,6 +20,11 @@ export class FormComponent implements OnInit {
 
   public ngOnInit() {
     //
+  }
+
+  public onFieldChange(field: Field) {
+    console.log(`Field "${field.name}" has changed.`);
+    this.change.emit(this.form);
   }
 
 }
