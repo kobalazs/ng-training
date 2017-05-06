@@ -4,7 +4,6 @@ export interface FieldConfig {
     label: string;
     type?: string;
     name: string;
-    model: any;
     defaultValue?: any;
     validators?: ValidatorFn[];
     options?: any[];
@@ -22,11 +21,11 @@ export class Field implements FieldConfig {
     public formControl: FormControl;
     public errorMessage: string;
 
-    public constructor(config: FieldConfig) {
+    public constructor(config: FieldConfig, model: any) {
         this.label = config.label;
         this.type = config.type;
         this.name = config.name;
-        this.model = config.model;
+        this.model = model;
         this.defaultValue = config.defaultValue;
         this.validators = config.validators;
         this.options = config.options;

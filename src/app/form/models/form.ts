@@ -2,6 +2,7 @@ import { Field, FieldConfig } from '../form.barrel';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 export interface FormConfig {
+    model: any;
     fields: FieldConfig[];
     onSubmit?: () => void;
     onReset?: () => void;
@@ -9,6 +10,7 @@ export interface FormConfig {
 }
 
 export class Form implements FormConfig { 
+    public model: any;
     public fields: Field[];
     public onSubmit: () => void;
     public onReset: () => void;
@@ -17,9 +19,10 @@ export class Form implements FormConfig {
     public formGroup: FormGroup;
 
     public constructor(config: FormConfig) {
+        this.model = config.model;
         this.fields = [];
         for (let fieldConfig of config.fields) {
-            this.fields.push(new Field(fieldConfig));
+            this.fields.push(new Field(fieldConfig, this.model));
         }
         this.onSubmit = config.onSubmit;
         this.onReset = config.onReset;

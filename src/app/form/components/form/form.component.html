@@ -1,8 +1,13 @@
-<form [formGroup]="form.formGroup" (ngSubmit)="onSubmit()">
+<form [formGroup]="form.formGroup" (ngSubmit)="onSubmit()" (ngReset)="onReset()">
   <app-field
     *ngFor="let field of form.fields"
     [field]="field"
     [formGroup]="form.formGroup"
     (change)="onFieldChange($event)"
   ></app-field>
+  <div *ngIf="!form.formGroup.valid && !form.formGroup.pristine" class="alert alert-warning">
+    Invalid field values!
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.formGroup.valid">Register</button>
+  <button type="reset" class="btn btn-default">Reset</button>
 </form>

@@ -13,24 +13,24 @@ import { Form } from '../../../form/form.barrel';
 export class RegistrationComponent implements OnInit {
   public loading: boolean = true;
   public user: User = new User();
-  public passwordConfirm: string;
   public form = new Form({
+    model: this.user,
     fields: [
       {
         name: 'email', type: 'text', label: 'Email',
-        model: this.user.email, validators: [Validators.required, Validators.email]
+        validators: [Validators.required, Validators.email]
       },
       {
         name: 'name', type: 'text', label: 'Name',
-        model: this.user.email, validators: [Validators.required]
+        validators: [Validators.required]
       },
       {
         name: 'password', type: 'password', label: 'Password',
-        model: this.user.email, validators: [Validators.required, Validators.minLength(6)]
+        validators: [Validators.required, Validators.minLength(6)]
       },
       {
         name: 'passwordConfirm', type: 'password', label: 'Password (confirm)',
-        model: this.passwordConfirm, validators: [Validators.required, Validators.minLength(6)]
+        validators: [Validators.required, Validators.minLength(6)]
       }
     ],
     validator: RegistrationComponent.passwordMatchValidator,
