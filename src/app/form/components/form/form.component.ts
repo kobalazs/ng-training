@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+
+import { Form } from '../../form.barrel';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  @Input() public form: Form;
+  @Output() public submit: () => Form;
+  @Output() public reset: () => Form;
+  @Output() public change: () => Form;
 
-  ngOnInit() {
+  public constructor() {
+    //
+  }
+
+  public ngOnInit() {
+    //
   }
 
 }

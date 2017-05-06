@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+
+import { Field } from '../../form.barrel';
 
 @Component({
   selector: 'app-field',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldComponent implements OnInit {
 
-  constructor() { }
+  @Input() public field: Field;
+  @Output() public change: () => Field;
 
-  ngOnInit() {
+  public constructor() {
+    //
+  }
+
+  public ngOnInit() {
+    //
   }
 
 }
