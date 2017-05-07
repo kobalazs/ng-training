@@ -5,9 +5,7 @@
     [formGroup]="form.formGroup"
     (change)="onFieldChange($event)"
   ></app-field>
-  <div *ngIf="!form.formGroup.valid && !form.formGroup.pristine" class="alert alert-warning">
-    Invalid field values!
-  </div>
+  <div *ngIf="!!form.errorMessage" class="alert alert-danger" [innerHtml]="form.errorMessage"></div>
   <button type="submit" class="btn btn-primary" [disabled]="!form.formGroup.valid">Register</button>
   <button type="reset" class="btn btn-default" (click)="onReset()">Reset</button>
 </form>

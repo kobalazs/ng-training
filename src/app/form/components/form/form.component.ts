@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
     if (field instanceof Field) {
       console.log(`Field "${field.name}" has changed.`);
       this.change.emit(this.form);
+      window.setTimeout(() => this.form.validate(), 0);
     }
   }
 

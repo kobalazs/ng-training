@@ -33,7 +33,13 @@ export class RegistrationComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(6)]
       }
     ],
-    validator: RegistrationComponent.passwordMatchValidator
+    validator: RegistrationComponent.passwordMatchValidator,
+    validatorMessages: {
+      required: 'This field must be filled!',
+      email: 'Invalid e-mail address!',
+      minlength: 'This field must be at least 6 characters long!',
+      passwordMatchValidator: 'Password and its confirmation should be the same!'
+    }
   });
   
   public constructor(private _userService: UserService) {
@@ -70,7 +76,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public static passwordMatchValidator(g: FormGroup) {
-    return g.get('password').value === g.get('passwordConfirm').value ? null : {'mismatch': true};
+    return g.get('password').value === g.get('passwordConfirm').value ? null : { passwordMatchValidator: true };
   }
 
 }
