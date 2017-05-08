@@ -14,7 +14,6 @@ export class RegistrationComponent implements OnInit {
   public loading: boolean = true;
   public user: User = new User();
   public form = new Form({
-    model: this.user,
     fields: [
       {
         name: 'email', type: 'text', label: 'Email',

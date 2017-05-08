@@ -12,7 +12,8 @@ export class FieldComponent implements OnInit {
 
   @Input() public field: Field;
   @Input() public formGroup: FormGroup;
-  @Output() public change = new EventEmitter<Field>();
+  @Input() public model: any;
+  @Output() public modelChange: EventEmitter<any> = new EventEmitter<any>();
 
   public constructor() {
     //
@@ -23,7 +24,7 @@ export class FieldComponent implements OnInit {
   }
 
   public onModelChange(model: any) {
-    this.change.emit(this.field);
+    this.modelChange.emit(this.model);
     window.setTimeout(() => this.field.validate(), 0);
   }
 

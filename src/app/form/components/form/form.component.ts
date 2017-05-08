@@ -10,9 +10,10 @@ import { Form, Field } from '../../form.barrel';
 export class FormComponent implements OnInit {
 
   @Input() public form: Form;
+  @Input() public model: any;
+  @Output() public modelChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() public submit = new EventEmitter<Form>();
   @Output() public reset = new EventEmitter<Form>();
-  @Output() public change = new EventEmitter<Form>();
 
   public constructor() {
     //
@@ -22,12 +23,9 @@ export class FormComponent implements OnInit {
     //
   }
 
-  public onFieldChange(field: Field) {
-    if (field instanceof Field) {
-      console.log(`Field "${field.name}" has changed.`);
-      this.change.emit(this.form);
-      window.setTimeout(() => this.form.validate(), 0);
-    }
+  public onFieldChange(fieldModel: any) {
+    this.modelChange.emit(this.model);
+    window.setTimeout(() => this.form.validate(), 0);
   }
 
   public onSubmit() {

@@ -2,14 +2,12 @@ import { Field, FieldConfig } from '../form.barrel';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 export interface FormConfig {
-    model: any;
     fields: FieldConfig[];
     validator?: (formGroup: FormGroup) => null | any;
     validatorMessages?: any;
 }
 
 export class Form implements FormConfig { 
-    public model: any;
     public fields: Field[];
     public onSubmit: () => void;
     public onReset: () => void;
@@ -20,13 +18,12 @@ export class Form implements FormConfig {
     public errorMessage: string;
 
     public constructor(config: FormConfig) {
-        this.model = config.model;
         this.validator = config.validator;
         this.validatorMessages = config.validatorMessages;
 
         this.fields = [];
         for (let fieldConfig of config.fields) {
-            this.fields.push(new Field(fieldConfig, this.model, this.validatorMessages));
+            this.fields.push(new Field(fieldConfig, this.validatorMessages));
         }
 
         this._composeFormGroup();

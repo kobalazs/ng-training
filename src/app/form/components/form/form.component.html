@@ -2,8 +2,9 @@
   <app-field
     *ngFor="let field of form.fields"
     [field]="field"
+    [(model)]="model[field.name]"
+    (modelChange)="onFieldChange($event)"
     [formGroup]="form.formGroup"
-    (change)="onFieldChange($event)"
   ></app-field>
   <div *ngIf="!!form.errorMessage" class="alert alert-danger" [innerHtml]="form.errorMessage"></div>
   <button type="submit" class="btn btn-primary" [disabled]="!form.formGroup.valid">Register</button>

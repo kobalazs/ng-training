@@ -14,7 +14,6 @@ export class Field implements FieldConfig {
     public label: string;
     public type: string;
     public name: string;
-    public model: any;
     public defaultValue: any;
     public validators: ValidatorFn[] = [];
     public validatorMessages: any = {};
@@ -23,11 +22,10 @@ export class Field implements FieldConfig {
     public formControl: FormControl;
     public errorMessage: string;
 
-    public constructor(config: FieldConfig, model: any, validatorMessages: any) {
+    public constructor(config: FieldConfig, validatorMessages: any) {
         this.label = config.label;
         this.type = config.type;
         this.name = config.name;
-        this.model = model;
         this.defaultValue = config.defaultValue;
         this.validators = config.validators;
         this.validatorMessages = validatorMessages;
