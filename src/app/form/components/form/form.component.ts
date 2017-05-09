@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Form, Field } from '../../form.barrel';
+import { DynamicFormGroup, DynamicFormControl } from '../../form.barrel';
 
 @Component({
   selector: 'app-form',
@@ -9,11 +9,11 @@ import { Form, Field } from '../../form.barrel';
 })
 export class FormComponent implements OnInit {
 
-  @Input() public form: Form;
+  @Input() public formGroup: DynamicFormGroup;
   @Input() public model: any;
   @Output() public modelChange: EventEmitter<any> = new EventEmitter<any>();
-  @Output() public submit = new EventEmitter<Form>();
-  @Output() public reset = new EventEmitter<Form>();
+  @Output() public submit = new EventEmitter();
+  @Output() public reset = new EventEmitter();
 
   public constructor() {
     //
@@ -25,17 +25,15 @@ export class FormComponent implements OnInit {
 
   public onFieldChange(fieldModel: any) {
     this.modelChange.emit(this.model);
-    window.setTimeout(() => this.form.validate(), 0);
+    window.setTimeout(() => this.formGroup.validate(), 0);
   }
 
   public onSubmit() {
-    this.submit.emit(this.form);
-    console.log(`Form has been submitted.`);
+    this.submit.emit();
   }
 
   public onReset() {
-    this.reset.emit(this.form);
-    console.log(`Form has been reset.`);
+    this.reset.emit();
   }
 
 }

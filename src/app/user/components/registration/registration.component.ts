@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Response } from '@angular/http';
 
 import { User, UserService } from '../../user.barrel';
-import { Form } from '../../../form/form.barrel';
+import { DynamicFormGroup, DynamicFormControl } from '../../../form/form.barrel';
 
 @Component({
   selector: 'app-registration',
@@ -13,25 +13,33 @@ import { Form } from '../../../form/form.barrel';
 export class RegistrationComponent implements OnInit {
   public loading: boolean = true;
   public user: User = new User();
-  public form = new Form({
-    fields: [
-      {
-        name: 'email', type: 'text', label: 'Email',
-        validators: [Validators.required, Validators.email]
+  public formGroup: DynamicFormGroup = new DynamicFormGroup({
+    controls: {
+      email: new DynamicFormControl({
+        type: 'text', label: 'Email',
+        validator: [Validators.required, Validators.email]
+      }),
+      name: new DynamicFormControl({
+        type: 'text', label: 'Name',
+        validator: [Validators.required]
+      }),
+      password: new DynamicFormControl({
+        type: 'password', label: 'Password',
+        validator: [Validators.required, Validators.minLength(6)]
+      }),
+      passwordConfirm: new DynamicFormControl({
+        type: 'password', label: 'Password (confirm)',
+        validator: [Validators.required, Validators.minLength(6)]
+      })
+    },
+    buttons: {
+      submit: {
+        label: 'Register'
       },
-      {
-        name: 'name', type: 'text', label: 'Name',
-        validators: [Validators.required]
-      },
-      {
-        name: 'password', type: 'password', label: 'Password',
-        validators: [Validators.required, Validators.minLength(6)]
-      },
-      {
-        name: 'passwordConfirm', type: 'password', label: 'Password (confirm)',
-        validators: [Validators.required, Validators.minLength(6)]
+      reset: {
+        label: 'Reset'
       }
-    ],
+    },
     validator: RegistrationComponent.passwordMatchValidator,
     validatorMessages: {
       required: 'This field must be filled!',
@@ -40,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       passwordMatchValidator: 'Password and its confirmation should be the same!'
     }
   });
-  
+
   public constructor(private _userService: UserService) {
     //
   }
@@ -58,9 +66,9 @@ export class RegistrationComponent implements OnInit {
       (response: Response) => {
         console.log(response);
         window.alert('Successful registration!');
-        
+
         this.user = new User();
-        this.form.reset();
+        this.formGroup.reset();
         this.loading = false;
       },
       (error: any) => {
