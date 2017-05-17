@@ -2,14 +2,20 @@ import { Component, OnInit } from '@angular/core';
 
 import {
   Task,
-  TaskService
+  TaskService,
+  OrderByPipe
 } from '../../task.barrel';
+
+
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
 })
+
+
+
 export class TaskListComponent implements OnInit {
   public tasks: Task[];
   public loading: boolean = true;
@@ -34,6 +40,7 @@ export class TaskListComponent implements OnInit {
     this.loading = true;
     let task = new Task();
     task.name = 'New Task';
+    task.position=this.tasks.length; //az utolsó helyre tegye egyből
     this._taskService.create(
       task,
       {
@@ -48,5 +55,73 @@ export class TaskListComponent implements OnInit {
       this.tasks.splice(index, 1);
     }
   }
+
+   public orderTaskUpInList(task: Task) {
+    let movableTask1:number = this.tasks.indexOf(task);
+
+    if (movableTask1 !== -1) {
+
+      //task.position;
+      let movableTask2:number = movableTask1-1;
+
+      for(let i=0; i<this.tasks.length; i++){
+        this.tasks[i].position=i;
+        if(i==movableTask1){
+          this.tasks[i].position=i-1;
+        }
+        if(i==movableTask2){
+          this.tasks[i].position=i+1;
+        }
+      }
+
+
+      this._taskService.update(
+        this.tasks[movableTask1],
+        {
+          finally: () => {
+            this._taskService.update(
+              this.tasks[movableTask2],
+              {
+                finally: () => this.loadTasks()
+              })
+          }
+        });
+
+    };
+  }
+  public orderTaskDownInList(task: Task) {
+    let movableTask1:number = this.tasks.indexOf(task);
+
+    if (movableTask1 !== -1) {
+
+      //task.position;
+      let movableTask2:number = movableTask1+1;
+
+      for(let i=0; i<this.tasks.length; i++){
+        this.tasks[i].position=i;
+        if(i==movableTask1){
+          this.tasks[i].position=i+1;
+        }
+        if(i==movableTask2){
+          this.tasks[i].position=i-1;
+        }
+      }
+
+      this._taskService.update(
+        this.tasks[movableTask1],
+        {
+          finally: () => {
+            this._taskService.update(
+              this.tasks[movableTask2],
+              {
+                finally: () => this.loadTasks()
+              })
+          }
+        });
+
+    };
+  }
+
+
 
 }
