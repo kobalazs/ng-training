@@ -14,7 +14,7 @@
         <li [routerLinkActive]="['active']">
           <a [routerLink]="['/home']">Home</a>
         </li>
-        <li [routerLinkActive]="['active']">
+        <li *ngIf="authService.user" [routerLinkActive]="['active']">
           <a [routerLink]="['/task/list']">Tasks</a>
         </li>
       </ul>

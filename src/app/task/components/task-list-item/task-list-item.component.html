@@ -1,5 +1,16 @@
-<input type="checkbox" [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled">
-<input type="text" [(ngModel)]="task.name" (change)="updateTask(task)" [disabled]="loading || disabled">
-<button class="btn btn-xs btn-danger" (click)="deleteTask(task)">Delete</button>
-<span class="small">{{task.created_at|age:now}} min</span>
-<img *ngIf="loading" src="assets/loader.gif">
+<div style="height: 80px; line-height: 80px; border: 0px solid red">
+  <md-checkbox [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled" style="margin-right: 20px"></md-checkbox>
+  <label style="margin-right: 20px"> {{task.position}}.</label>
+  <md-input-container>
+      <input mdInput [(ngModel)]="task.name" placeholder="Task name" (change)="updateTask(task)" [disabled]="loading || disabled">
+  </md-input-container>
+  <button class="btn btn-xs btn-danger" (click)="deleteTask(task)" [disabled]="loading || disabled" style="margin-right: 20px">Törlés</button>
+  <button type="button" [ngStyle]="{'visibility': !isFirstTaskItem?'visible':'hidden'}" class="btn btn-xs btn-info" (click)="moveUpTask(task)" [disabled]="isFirstTaskItem || disabled || loading">Up</button>
+  <button type="button" [ngStyle]="{'visibility': !isLastTaskItem?'visible':'hidden'}" class="btn btn-xs btn-info" (click)="moveDownTask(task)" [disabled]="isLastTaskItem || disabled || loading">Down</button>
+  
+  <button style="visibility:hidden"  class="align-bottom" md-mini-fab ><md-icon>keyboard_arrow_up</md-icon></button>
+  <button style="visibility:hidden"  md-button color="primary" ><md-icon>keyboard_arrow_down</md-icon></button>
+
+  <span class="small">{{task.created_at|age:now}} min</span>
+  <img *ngIf="loading" src="assets/loader.gif">
+</div>

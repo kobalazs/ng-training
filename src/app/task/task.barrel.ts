@@ -10,6 +10,7 @@ export * from './components/task-list-item/task-list-item.component';
 
 // Pipes
 export * from './pipes/age.pipe';
+export * from './pipes/order-by.pipe';
 
 // Routing
 export * from './task.routing';

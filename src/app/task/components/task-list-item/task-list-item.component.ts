@@ -4,6 +4,7 @@ import {
   Task,
   TaskService
 } from '../../task.barrel';
+
 import {
   Timekeeper
 } from '../../../shared/shared.barrel';
@@ -18,10 +19,17 @@ export class TaskListItemComponent implements OnInit {
   @Timekeeper() public now: number;
   @Input() public disabled: boolean;
   @Input() public task: Task;
+  
+  @Input() public isFirstTaskItem: boolean;
+  @Input() public isLastTaskItem: boolean;
+
   @Output() public onError = new EventEmitter();
   @Output() public onDelete = new EventEmitter<Task>();
+  @Output() public onOrderingUp = new EventEmitter<Task>();
+  @Output() public onOrderingDown = new EventEmitter<Task>();
 
   public constructor(private _taskService: TaskService) {
+    
     //
   }
 
@@ -54,6 +62,14 @@ export class TaskListItemComponent implements OnInit {
         finally: () => this.loading = false
       }
     )
+  }
+
+  public moveUpTask(task: Task) {
+    this.onOrderingUp.emit(task);
+  }
+  
+  public moveDownTask(task: Task) {
+    this.onOrderingDown.emit(task);
   }
 
 }
