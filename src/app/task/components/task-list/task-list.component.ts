@@ -25,7 +25,16 @@ export class TaskListComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.loadTasks();
+    this.loadTasksAndRepositions();
+  }
+
+  public loadTasksAndRepositions() {
+    //mivel ez az az ngOnInit-ből van hívva, ezért programfutásonként csak egyszer fog lefutni
+    this.loading = true;
+    this._taskService.listAndRepostitionAllTask({
+      success: response => this.tasks = response,
+      finally: () => this.loading = false
+    });
   }
 
   public loadTasks() {

@@ -22,6 +22,24 @@ export class TaskService {
     );
   }
 
+  public listAndRepostitionAllTask(responseConfig: ApiResponseConfig): void {
+    //ez tehát most minden listázás előtt, lefuttatsja az újrasorszámozást is
+    this._apiService.ResetAllTaskPosition({
+      success: ()=>{
+        //csak ennyi volt a régi listázás - begin
+        this._apiService.request(
+          {
+            method: 'Get',
+            url: 'task'
+          },
+          responseConfig
+        );
+        //csak ennyi volt a régi listázás - end
+
+      }
+    });
+  }
+
   public create(task: Task, responseConfig: ApiResponseConfig): void {
     this._apiService.request(
       {

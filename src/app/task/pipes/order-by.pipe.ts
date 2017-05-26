@@ -10,7 +10,7 @@ export class OrderByPipe implements PipeTransform {
         return;
     };
 
-    console.log("array="+array+"; call OrderByPipe -> 'orderField='"+ orderField+"; 'orderType='"+orderType);
+    //console.log("array="+array+"; call OrderByPipe -> 'orderField='"+ orderField+"; 'orderType='"+orderType);
     array.sort( ( a: any, b: any ) => {
         let ae = a[ orderField ];
         let be = b[ orderField ];
