@@ -6,6 +6,10 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from './shared/shared.module';
+import { MaterialModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdIconModule } from '@angular/material';
+import 'hammerjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -16,9 +20,12 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdIconModule,
+    BrowserAnimationsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

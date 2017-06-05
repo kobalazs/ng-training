@@ -17,12 +17,12 @@ export class AuthService {
   }
 
   public login(user: User): Observable<Response> {
-    let observable: Observable<Response> = this._http.post(
+    let ob: Observable<Response> = this._http.post(
       environment.apiEndpoint + '/auth',
       user
     );
 
-    observable.subscribe(
+    ob.subscribe(
       (response: Response) => {
         this.user = response.json()['user'];
         this.token = response.json()['token'];
@@ -33,7 +33,7 @@ export class AuthService {
       }
     )
 
-    return observable;
+    return ob;
   }
 
   public logout(): void {
