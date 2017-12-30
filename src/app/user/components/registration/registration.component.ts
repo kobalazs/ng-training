@@ -33,4 +33,8 @@ export class RegistrationComponent implements OnInit {
     //
   }
 
+  public register() {
+    console.log('Register user:', this.user);
+  }
+
 }
