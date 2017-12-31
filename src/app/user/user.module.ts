@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { UserRoutingModule } from './user-routing.module';
-import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import {
+  UserService,
+  UserRoutingModule,
+  LoginComponent,
+  RegistrationComponent
+} from './';
 
 @NgModule({
   imports: [
@@ -13,6 +16,12 @@ import { RegistrationComponent } from './components/registration/registration.co
     ReactiveFormsModule,
     UserRoutingModule
   ],
-  declarations: [LoginComponent, RegistrationComponent]
+  declarations: [
+    LoginComponent,
+    RegistrationComponent
+  ],
+  providers: [
+    UserService
+  ]
 })
 export class UserModule { }
