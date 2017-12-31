@@ -1,0 +1,6 @@
+.navbar-nav a {
+  cursor: pointer;
+}
+.navbar-nav div {
+  margin: 15px;
+}

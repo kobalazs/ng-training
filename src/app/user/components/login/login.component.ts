@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     }
   );
 
-  public constructor(private _authService: AuthService) {
+  public constructor(private _authService: AuthService, private _router: Router) {
     //
   }
 
@@ -31,10 +32,9 @@ export class LoginComponent implements OnInit {
   public login() {
     this._authService.login(this.user).subscribe(
       (response: Response) => {
-        console.log(response);
-        window.alert('Successful login!');
         this.user = new User();
         this.form.reset();
+        this._router.navigate(['/']);
       },
       (error: any) => {
         console.log(error);
