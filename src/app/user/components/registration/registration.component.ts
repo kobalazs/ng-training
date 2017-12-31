@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -25,7 +26,7 @@ export class RegistrationComponent implements OnInit {
     return g.get('password').value === g.get('passwordConfirm').value ? null : { 'mismatch': true };
   }
 
-  public constructor() {
+  public constructor(private _userService: UserService) {
     //
   }
 
@@ -34,7 +35,22 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
-    console.log('Register user:', this.user);
+    this._userService.register(this.user).subscribe(
+      (response: Response) => {
+        console.log(response);
+        window.alert('Successful registration!');
+
+        this.user = new User();
+        this.form.reset();
+      },
+      (error: any) => {
+        console.log(error);
+        window.alert('Registration failed.');
+      },
+      () => {
+        //
+      }
+    );
   }
 
 }

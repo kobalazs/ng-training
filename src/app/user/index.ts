@@ -1,8 +1,8 @@
-// Routing
-export * from './user-routing.module';
-
 // Services
 export * from './services/user.service';
+
+// Models
+export * from './models/user';
 
 // Components
 export * from './components/login/login.component';
