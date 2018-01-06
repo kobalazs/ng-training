@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../../environments/environment';
@@ -11,7 +12,7 @@ export class AuthService {
   public user: User;
   public token: string;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private _router: Router) {
     this._loadFromStorage();
   }
 
@@ -37,6 +38,7 @@ export class AuthService {
     this.user = undefined;
     this.token = undefined;
     this._saveToStorage();
+    this._router.navigate(['/']);
   }
 
   private _saveToStorage(): void {

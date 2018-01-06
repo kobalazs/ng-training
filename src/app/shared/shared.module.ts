@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { AuthService } from './index';
+import { AuthService, AuthGuard } from './';
 
 @NgModule({
   imports: [
@@ -14,7 +14,8 @@ import { AuthService } from './index';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   declarations: [
     NotFoundComponent,
