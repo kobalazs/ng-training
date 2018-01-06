@@ -2,20 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from '../../../environments/environment';
 import { Task } from '../';
+import { ApiService } from '../../shared/';
 
 @Injectable()
-export class TaskService {
-
-  public constructor(private _http: HttpClient) {
-    //
-  }
+export class TaskService extends ApiService {
 
   public list(): Observable<Task[]> {
-    return this._http.get<Task[]>(
-      environment.apiEndpoint + '/task'
-    );
+    return this.request('GET', 'task');
   }
 
 }
