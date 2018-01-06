@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  public loading = true;
   public user: User = new User;
   public form = new FormGroup(
     {
@@ -31,10 +32,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   public ngOnInit() {
-    //
+    this.loading = false;
   }
 
   public register() {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
     this._userService.register(this.user).subscribe(
       (response: Response) => {
         console.log(response);
@@ -42,10 +47,12 @@ export class RegistrationComponent implements OnInit {
 
         this.user = new User();
         this.form.reset();
+        this.loading = false;
       },
       (error: any) => {
         console.log(error);
         window.alert('Registration failed.');
+        this.loading = false;
       },
       () => {
         //

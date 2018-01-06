@@ -12,7 +12,7 @@ export class AuthService {
   public token: string;
 
   constructor(private _http: HttpClient) {
-    //
+    this._loadFromStorage();
   }
 
   public login(user: User): Observable<Response> {
@@ -24,6 +24,7 @@ export class AuthService {
       (response: Response) => {
         this.user = response['user'];
         this.token = response['token'];
+        this._saveToStorage();
       },
       (error: any) => {
         this.token = undefined;
@@ -35,6 +36,26 @@ export class AuthService {
   public logout(): void {
     this.user = undefined;
     this.token = undefined;
+    this._saveToStorage();
+  }
+
+  private _saveToStorage(): void {
+    if (this.token) {
+      localStorage.setItem('token', this.token);
+    } else {
+      localStorage.removeItem('token');
+    }
+    if (this.user) {
+      localStorage.setItem('user', JSON.stringify(this.user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }
+
+  private _loadFromStorage(): void {
+    this.token = localStorage.getItem('token');
+    const userString: string = localStorage.getItem('user');
+    this.user = userString ? JSON.parse(userString) : undefined;
   }
 
 }

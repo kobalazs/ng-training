@@ -13,6 +13,7 @@ import { AuthService } from '../../../shared/';
 })
 export class LoginComponent implements OnInit {
 
+  public loading = true;
   public user: User = new User();
   public form = new FormGroup(
     {
@@ -26,10 +27,14 @@ export class LoginComponent implements OnInit {
   }
 
   public ngOnInit() {
-    //
+    this.loading = false;
   }
 
   public login() {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
     this._authService.login(this.user).subscribe(
       (response: Response) => {
         this.user = new User();
@@ -39,6 +44,7 @@ export class LoginComponent implements OnInit {
       (error: any) => {
         console.log(error);
         window.alert('Login failed.');
+        this.loading = false;
       },
       () => {
         //
