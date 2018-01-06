@@ -14,11 +14,11 @@
         <li [routerLinkActive]="['active']">
           <a [routerLink]="['/home']">Home</a>
         </li>
-        <li [routerLinkActive]="['active']">
-          <a [routerLink]="['/user/registration']">Registration</a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!authService.user" [routerLinkActive]="['active']">
+          <a [routerLink]="['/user/registration']">Registration</a>
+        </li>
         <li *ngIf="!authService.user" [routerLinkActive]="['active']">
           <a [routerLink]="['/user/login']">Log In</a>
         </li>
