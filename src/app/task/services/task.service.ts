@@ -16,4 +16,8 @@ export class TaskService extends ApiService {
     return this.request('POST', 'task', task);
   }
 
+  public update(task: Task): Observable<Task> {
+    return this.request('PATCH', 'task/' + task.id, task);
+  }
+
 }

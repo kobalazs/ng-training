@@ -31,6 +31,7 @@ export class ApiService {
           this._authService.logout();
         }
         window.alert(errorBody['error'] ? errorBody['error'] : 'Unexpected system error.');
+        subject.error(errorResponse);
       }
     );
     return subject.asObservable();

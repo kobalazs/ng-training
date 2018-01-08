@@ -33,4 +33,11 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  public updateTask(task: Task) {
+    this._taskService.update(task).subscribe(
+      updatedTask => task = updatedTask,
+      error => this._loadTasks()
+    );
+  }
+
 }
