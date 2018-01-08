@@ -12,4 +12,8 @@ export class TaskService extends ApiService {
     return this.request('GET', 'task');
   }
 
+  public create(task: Task): Observable<Task> {
+    return this.request('POST', 'task', task);
+  }
+
 }
