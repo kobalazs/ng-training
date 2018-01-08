@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../../environments/environment';
@@ -21,8 +22,9 @@ export class ApiService {
         headers: this._getHeaders()
       }
     );
+    const subject = new Subject<any>();
     observable.subscribe(
-      response => {},
+      response => subject.next(response),
       errorResponse => {
         const errorBody = (errorResponse as HttpErrorResponse).error;
         if (['token_expired', 'token_invalid', 'token_not_provided'].indexOf(errorBody['error']) !== -1) {
@@ -31,7 +33,7 @@ export class ApiService {
         window.alert(errorBody['error'] ? errorBody['error'] : 'Unexpected system error.');
       }
     );
-    return observable;
+    return subject.asObservable();
   }
 
   private _getHeaders(): {[key: string]: string} {

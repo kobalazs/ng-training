@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { environment } from '../../../environments/environment';
 import { User } from '../../user/';
@@ -21,17 +22,20 @@ export class AuthService {
       environment.apiEndpoint + '/auth',
       user
     );
+    const subject = new Subject<any>();
     observable.subscribe(
       (response: Response) => {
         this.user = response['user'];
         this.token = response['token'];
         this._saveToStorage();
+        subject.next(response);
       },
       (error: any) => {
         this.token = undefined;
+        subject.error(error);
       }
     );
-    return observable;
+    return subject.asObservable();
   }
 
   public logout(): void {
