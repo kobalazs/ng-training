@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TaskRoutingModule } from './task-routing.module';
-import { TaskListComponent, TaskService } from './';
+import { TaskListComponent, TaskListItemComponent, TaskService } from './';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { TaskListComponent, TaskService } from './';
     TaskService
   ],
   declarations: [
-    TaskListComponent
+    TaskListComponent,
+    TaskListItemComponent
   ]
 })
 export class TaskModule { }

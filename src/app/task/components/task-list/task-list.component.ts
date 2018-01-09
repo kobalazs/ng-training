@@ -17,10 +17,10 @@ export class TaskListComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this._loadTasks();
+    this.loadTasks();
   }
 
-  private _loadTasks() {
+  public loadTasks() {
     this.loading = true;
     this._taskService.list().subscribe(
       tasks => {
@@ -35,19 +35,8 @@ export class TaskListComponent implements OnInit {
     const task = new Task();
     task.name = 'New Task';
     this._taskService.create(task).subscribe(
-      () => this._loadTasks(),
-      () => this._loadTasks()
-    );
-  }
-
-  public updateTask(task: Task) {
-    this.loading = true;
-    this._taskService.update(task).subscribe(
-      updatedTask => {
-        task = updatedTask;
-        this.loading = false;
-      },
-      error => this._loadTasks()
+      () => this.loadTasks(),
+      () => this.loadTasks()
     );
   }
 
