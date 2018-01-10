@@ -1,6 +1,9 @@
 // Models
 export * from './models/task';
 
+// Pipes
+export * from './pipes/age.pipe';
+
 // Services
 export * from './services/task.service';
 

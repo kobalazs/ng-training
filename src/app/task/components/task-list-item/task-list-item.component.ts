@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
@@ -8,20 +8,34 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './task-list-item.component.html',
   styleUrls: ['./task-list-item.component.css']
 })
-export class TaskListItemComponent implements OnInit {
+export class TaskListItemComponent implements OnInit, OnDestroy {
 
   public loading: boolean;
+  public now: number;
   @Input() public task: Task;
   @Input() public disabled: boolean;
   @Output() public error = new EventEmitter();
   @Output() public delete = new EventEmitter<Task>();
+
+  private  _timekeeper: number;
 
   public constructor(private _taskService: TaskService) {
     //
   }
 
   public ngOnInit() {
-    //
+    this.now = this._getGmtTime();
+    this._timekeeper = window.setInterval(() => {
+      this.now = this._getGmtTime();
+    }, 1000);
+  }
+
+  public ngOnDestroy() {
+    window.clearInterval(this._timekeeper);
+  }
+
+  private _getGmtTime() {
+    return Date.now() + (new Date()).getTimezoneOffset() * 60 * 1000;
   }
 
   public updateTask(task: Task) {
