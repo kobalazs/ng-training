@@ -4,7 +4,12 @@
 </h3>
 <ul>
   <li *ngFor="let task of tasks">
-      <app-task-list-item [task]="task" [disabled]="loading" (error)="loadTasks()"></app-task-list-item>
+      <app-task-list-item
+        [task]="task"
+        [disabled]="loading"
+        (error)="loadTasks()"
+        (delete)="removeTask($event)"
+      ></app-task-list-item>
   </li>
 </ul>
 <button type="button" class="btn btn-default" (click)="addNewTask()" [disabled]="loading">
