@@ -7,8 +7,8 @@ describe('ng-training App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display home works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('home works!');
   });
 });
