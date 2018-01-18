@@ -25,6 +25,7 @@
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "rxjs": "^5.5.2",
+    "spectrum-colorpicker": "^1.8.0",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {

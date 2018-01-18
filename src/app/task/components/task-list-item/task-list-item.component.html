@@ -1,5 +1,6 @@
 <input type="checkbox" [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled">
 <input [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading || disabled">
+<input class="colorpicker">
 <button class="btn btn-xs btn-danger" (click)="deleteTask(task)">Delete</button>
 <span class="small">{{task.created_at|age:now}} minutes</span>
 <img *ngIf="loading" src="assets/loader.gif">
