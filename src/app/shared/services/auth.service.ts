@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/user/models/user';
@@ -27,17 +27,20 @@ export class AuthService {
       environment.apiEndpoint + '/auth',
       user
     );
+    const subject = new Subject<AuthResponse>();
     observable.subscribe(
       (authResponse: AuthResponse) => {
         this.token = authResponse.token;
         this.user = authResponse.user;
         this.saveToStorage();
+        subject.next(authResponse);
       },
       (error: any) => {
         this.logout();
+        subject.error(error);
       }
     );
-    return observable;
+    return subject.asObservable();
   }
 
   public logout(): void {
