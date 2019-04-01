@@ -31,18 +31,7 @@ export class TaskListComponent implements OnInit {
     );
   }
 
-  public updateTask(task: Task) {
-    this.loading = true;
-    this.taskService.update(task).subscribe(
-      updatedTask => {
-        task = updatedTask;
-        this.loading = false;
-      },
-      error => this.loadTasks()
-    );
-  }
-
-  private loadTasks() {
+  public loadTasks() {
     this.loading = true;
     this.taskService.list().subscribe(
       tasks => {
