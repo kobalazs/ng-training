@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     }
   );
+  public loading = false;
 
   public constructor(private authService: AuthService, private router: Router) {
     //
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
+    this.loading = true;
     this.authService.login(this.form.value).subscribe(
       (response: AuthResponse) => {
         this.form.reset();
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
       (error: any) => {
         console.log(error);
         window.alert('Login failed.');
+        this.loading = false;
       },
       () => {
         //

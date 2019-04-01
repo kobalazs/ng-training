@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -20,8 +21,9 @@ export class RegistrationComponent implements OnInit {
     },
     this.passwordMatchValidator
   );
+  public loading = false;
 
-  public constructor(private userService: UserService) {
+  public constructor(private userService: UserService, private router: Router) {
     //
   }
 
@@ -30,15 +32,17 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
+    this.loading = true;
     this.userService.register(this.form.value).subscribe(
       (user: User) => {
-        console.log(user);
         window.alert('Successful registration!');
         this.form.reset();
+        this.router.navigate(['/user/login']);
       },
       (error: any) => {
         console.log(error);
         window.alert('Registration failed.');
+        this.loading = false;
       },
       () => {
         //
