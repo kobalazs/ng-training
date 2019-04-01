@@ -13,6 +13,7 @@ export class TaskListItemComponent implements OnInit {
   public loading: boolean;
   @Input() public task: Task;
   @Input() public disabled: boolean;
+  @Output() public delete = new EventEmitter<Task>();
   @Output() public error = new EventEmitter();
 
   public constructor(private taskService: TaskService) {
@@ -28,6 +29,23 @@ export class TaskListItemComponent implements OnInit {
     this.taskService.update(task).subscribe(
       updatedTask => {
         task = updatedTask;
+        this.loading = false;
+      },
+      error => {
+        this.error.emit();
+        this.loading = false;
+      }
+    );
+  }
+
+  public deleteTask(task: Task) {
+    if (!window.confirm(`Are you sure to delete "${task.name}"?`)) {
+      return;
+    }
+    this.loading = true;
+    this.taskService.delete(task).subscribe(
+      () => {
+        this.delete.emit(task);
         this.loading = false;
       },
       error => {

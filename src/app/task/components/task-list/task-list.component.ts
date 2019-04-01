@@ -45,4 +45,8 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  public removeTask(removableTask: Task) {
+    this.tasks = this.tasks.filter(task => task !== removableTask);
+  }
+
 }

@@ -17,6 +17,10 @@ export class TaskService extends ApiService {
     return this.request('PATCH', 'task/' + task.id, task);
   }
 
+  public delete(task: Task): Observable<void> {
+    return this.request('DELETE', 'task/' + task.id);
+  }
+
   public list(): Observable<Task[]> {
     return this.request<Task[]>('GET', 'task');
   }
