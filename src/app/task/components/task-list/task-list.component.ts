@@ -28,6 +28,13 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  public updateTask(task: Task) {
+    this.taskService.update(task).subscribe(
+      updatedTask => task = updatedTask,
+      error => this.loadTasks()
+    );
+  }
+
   private loadTasks() {
     this.taskService.list().subscribe(
       tasks => this.tasks = tasks,
