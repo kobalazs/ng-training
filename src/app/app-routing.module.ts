@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomeModule' },
   { path: 'user', loadChildren: './user/user.module#UserModule' },
+  { path: 'task', loadChildren: './task/task.module#TaskModule' },
   { path: '**', component: NotFoundComponent }
 ];
 
