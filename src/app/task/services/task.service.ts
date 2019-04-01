@@ -9,6 +9,10 @@ import { Task } from '../models/task';
 })
 export class TaskService extends ApiService {
 
+  public create(task: Task): Observable<Task> {
+    return this.request<Task>('POST', 'task', task);
+  }
+
   public list(): Observable<Task[]> {
     return this.request<Task[]>('GET', 'task');
   }
