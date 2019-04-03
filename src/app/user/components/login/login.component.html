@@ -1,18 +1,18 @@
 <h3>Log In</h3>
 <form [formGroup]="form" (ngSubmit)="login()">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input formControlName="email" type="text" class="form-control">
-    <div *ngIf="!form.controls.email.valid && !form.controls.email.pristine " class="alert alert-danger">
+  <mat-form-field>
+    <input matInput formControlName="email" type="text" placeholder="Email">
+    <mat-error *ngIf="!form.controls.email.valid && !form.controls.email.pristine">
       Valid email is required!
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input formControlName="password" type="password" class="form-control">
-    <div *ngIf="!form.controls.password.valid && !form.controls.password.pristine " class="alert alert-danger">
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="password" type="password" class="Password">
+    <mat-error *ngIf="!form.controls.password.valid && !form.controls.password.pristine ">
       Password is required and should be at least 6 characters long!
-    </div>
+    </mat-error>
+  </mat-form-field>
+  <div class="button-container">
+    <button mat-flat-button type="submit" color="primary" [disabled]="!form.valid || loading">Log In</button>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loading">Log In</button>
 </form>

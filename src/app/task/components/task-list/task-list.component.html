@@ -10,8 +10,8 @@
       (delete)="removeTask($event)"
       (error)="loadTasks()"
     ></app-task-list-item>
-  </li>    
+  </li>
 </ul>
-<button type="button" class="btn btn-primary" (click)="addNewTask()" [disabled]="loading">
+<button mat-flat-button color="primary" (click)="addNewTask()" [disabled]="loading">
   Add New Task
 </button>

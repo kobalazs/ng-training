@@ -1,36 +1,34 @@
 <h3>Registration</h3>
 <form [formGroup]="form" (ngSubmit)="register()">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input formControlName="name" type="text" class="form-control">
-    <div *ngIf="!form.controls.name.valid && !form.controls.name.pristine" class="alert alert-danger">
+  <mat-form-field>
+    <input matInput formControlName="name" type="text" placeholder="Name">
+    <mat-error *ngIf="!form.controls.name.valid && !form.controls.name.pristine">
       Name is required!
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input formControlName="email" type="text" class="form-control">
-    <div *ngIf="!form.controls.email.valid && !form.controls.email.pristine" class="alert alert-danger">
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="email" type="text" placeholder="Email">
+    <mat-error *ngIf="!form.controls.email.valid && !form.controls.email.pristine">
       Valid email is required!
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input formControlName="password" type="password" class="form-control">
-    <div *ngIf="!form.controls.password.valid && !form.controls.password.pristine" class="alert alert-danger">
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="password" type="password" placeholder="Password">
+    <mat-error *ngIf="!form.controls.password.valid && !form.controls.password.pristine">
       Password is required and should be at least 6 characters long!
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password (confirm)</label>
-    <input formControlName="passwordConfirm" type="password" class="form-control">
-    <div *ngIf="!form.controls.passwordConfirm.valid && !form.controls.passwordConfirm.pristine" class="alert alert-danger">
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="passwordConfirm" type="password" placeholder="Password (confirm)">
+    <mat-error *ngIf="!form.controls.passwordConfirm.valid && !form.controls.passwordConfirm.pristine">
       Password is required and should be at least 6 characters long!
-    </div>
-  </div>
-  <div *ngIf="!form.valid && !form.pristine" class="alert alert-warning">
+    </mat-error>
+  </mat-form-field>
+  <mat-card *ngIf="!form.valid && !form.pristine">
     All fields should be filled and passwords should be matching values!
+  </mat-card>
+  <div class="button-container">
+    <button mat-flat-button type="submit" color="primary" [disabled]="!form.valid || loading">Register</button>
+    <button mat-flat-button type="reset">Reset</button>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loading">Register</button>
-  <button type="reset" class="btn btn-default">Reset</button>
 </form>
