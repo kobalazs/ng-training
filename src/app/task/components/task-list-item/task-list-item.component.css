@@ -1,6 +1,13 @@
 input[type=text] {
     margin: 0 12px;
 }
+input.colorPicker {
+    margin-right: 12px;
+    height: 26px;
+    width: 26px;
+    border-radius: 13px;
+    border: 1px solid lightgray;
+}
 button {
     margin-right: 12px;
 }
