@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { TaskEditorModalComponent } from '../task-editor-modal/task-editor-modal.component';
 
 @Component({
   selector: 'app-task-list-item',
@@ -18,7 +20,7 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
   private timekeeper: number;
   public now: number = Date.now();
 
-  public constructor(private taskService: TaskService) {
+  public constructor(private taskService: TaskService, public dialog: MatDialog) {
     //
   }
 
@@ -30,6 +32,22 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     window.clearInterval(this.timekeeper);
+  }
+
+  public openEditor(task: Task): void {
+    const dialogRef = this.dialog.open(
+      TaskEditorModalComponent,
+      {
+        data: Object.assign({}, task),
+        width: '250px'
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.task = result;
+        this.updateTask(result);
+      }
+    });
   }
 
   public updateTask(task: Task) {
