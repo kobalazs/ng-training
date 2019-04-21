@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/user/models/user';
@@ -23,24 +24,21 @@ export class AuthService {
   }
 
   public login(user: User): Observable<AuthResponse> {
-    const observable: Observable<AuthResponse> = this.http.post<AuthResponse>(
+    return this.http.post<AuthResponse>(
       environment.apiEndpoint + '/auth',
       user
+    ).pipe(
+      tap(
+        (authResponse: AuthResponse): void => {
+          this.token = authResponse.token;
+          this.user = authResponse.user;
+          this.saveToStorage();
+        },
+        (): void => {
+          this.logout();
+        }
+      ),
     );
-    const subject = new Subject<AuthResponse>();
-    observable.subscribe(
-      (authResponse: AuthResponse) => {
-        this.token = authResponse.token;
-        this.user = authResponse.user;
-        this.saveToStorage();
-        subject.next(authResponse);
-      },
-      (error: any) => {
-        this.logout();
-        subject.error(error);
-      }
-    );
-    return subject.asObservable();
   }
 
   public logout(): void {

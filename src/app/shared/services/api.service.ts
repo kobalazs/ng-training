@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
@@ -15,27 +16,25 @@ export class ApiService {
   }
 
   public request<T>(method: string, url: string, body?: any): Observable<T> {
-    const observable = this.http.request<T>(
+    return this.http.request<T>(
       method,
       environment.apiEndpoint + '/' + url,
       {
         body,
         headers: this._getHeaders()
       }
-    );
-    const subject = new Subject<T>();
-    observable.subscribe(
-      response => subject.next(response),
-      errorResponse => {
-        const errorBody = (errorResponse as HttpErrorResponse).error;
-        if (['token_expired', 'token_invalid', 'token_not_provided'].indexOf(errorBody.error) !== -1) {
-          this.authService.logout();
+    ).pipe(
+      tap(
+        () => {},
+        errorResponse => {
+          const errorBody = (errorResponse as HttpErrorResponse).error;
+          if (['token_expired', 'token_invalid', 'token_not_provided'].indexOf(errorBody.error) !== -1) {
+            this.authService.logout();
+          }
+          window.alert(errorBody.error ? errorBody.error : 'Unexpected system error.');
         }
-        window.alert(errorBody.error ? errorBody.error : 'Unexpected system error.');
-        subject.error(errorResponse);
-      }
+      ),
     );
-    return subject.asObservable();
   }
 
   private _getHeaders(): {[key: string]: string} {
