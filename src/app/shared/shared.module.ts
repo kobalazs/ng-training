@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -12,7 +13,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     NavigationComponent

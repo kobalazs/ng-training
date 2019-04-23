@@ -11,9 +11,9 @@ import { Task } from '../../models/task';
 export class TaskListComponent implements OnInit {
 
   public loading: boolean;
-  public tasks: Task[] = [];
+  public tasks: Task[];
 
-  public constructor(private taskService: TaskService) {
+  public constructor(public taskService: TaskService) {
     //
   }
 
@@ -33,20 +33,13 @@ export class TaskListComponent implements OnInit {
 
   public loadTasks() {
     this.loading = true;
-    this.taskService.list().subscribe(
-      tasks => {
-        this.tasks = tasks;
-        this.loading = false;
-      },
-      error => {
-        console.log(error);
-        this.loading = false;
-      }
+    this.taskService.load().subscribe(
+      () => this.loading = false
     );
   }
 
   public removeTask(removableTask: Task) {
-    this.tasks = this.tasks.filter(task => task !== removableTask);
+    this.taskService.tasks = this.taskService.tasks.filter(task => task !== removableTask);
   }
 
 }

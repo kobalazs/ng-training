@@ -7,6 +7,13 @@
     <li class="nav-item" [routerLinkActive]="['active']">
       <a class="nav-link" [routerLink]="['/task/list']">Tasks</a>
     </li>
+    <li class="nav-item">
+      <input
+        [attr.placeholder]="'Search in ' + taskService.tasks.length + ' task(s)'"
+        [ngModel]="taskService.searchTerm"
+        (ngModelChange)="search($event)"
+      >
+    </li>
   </ul>
   <ul class="navbar-nav ml-auto" *ngIf="!authService.user">
     <li class="nav-item" [routerLinkActive]="['active']">
