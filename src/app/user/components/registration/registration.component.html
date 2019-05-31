@@ -1,6 +1,5 @@
 <h3>Registration</h3>
-<pre>{{form.value|json}}</pre>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="register()">
   <div class="form-group">
     <label for="name">Name</label>
     <input formControlName="name" type="text" class="form-control">
@@ -32,4 +31,6 @@
   <div *ngIf="!form.valid && !form.pristine" class="alert alert-warning">
     All fields should be filled and passwords should be matching values!
   </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Register</button>
+  <button type="reset" class="btn btn-default">Reset</button>
 </form>
