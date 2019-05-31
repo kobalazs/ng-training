@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -18,7 +20,7 @@ export class RegistrationComponent implements OnInit {
     this.passwordMatchValidator
   );
 
-  public constructor() {
+  public constructor(private userService: UserService) {
     //
   }
 
@@ -27,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
-    console.log('Register user:', this.form.value);
+    this.userService.register(this.form.value);
   }
 
   private passwordMatchValidator(g: FormGroup) {
