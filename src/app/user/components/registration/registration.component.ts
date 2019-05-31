@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { UserDto } from '../../dtos/user.dto';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -29,7 +30,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
-    this.userService.register(this.form.value);
+    this.userService.register(this.form.value).subscribe(
+      (userDto: UserDto) => {
+        console.log(userDto);
+        window.alert('Successful registration!');
+        this.form.reset();
+      },
+      (error: any) => {
+        console.log(error);
+        window.alert('Registration failed.');
+      },
+      () => {
+        //
+      }
+    );
   }
 
   private passwordMatchValidator(g: FormGroup) {
