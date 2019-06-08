@@ -14,10 +14,10 @@ export class UserService {
     //
   }
 
-  public register(userDto: UserDto): Observable<UserDto> {
+  public register(user: UserDto): Observable<UserDto> {
     return this.http.post<UserDto>(
       environment.apiEndpoint + '/user/register',
-      userDto
+      user
     );
   }
 

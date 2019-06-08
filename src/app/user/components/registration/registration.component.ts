@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
 
   public register() {
     this.userService.register(this.form.value).subscribe(
-      (userDto: UserDto) => {
-        console.log(userDto);
+      (user: UserDto) => {
+        console.log(user);
         window.alert('Successful registration!');
         this.form.reset();
       },
