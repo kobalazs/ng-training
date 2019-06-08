@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TaskService } from '../../services/task.service';
+import { TaskDto } from '../../dtos/task.dto';
+
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() { }
+  public tasks: TaskDto[] = [];
 
-  ngOnInit() {
+  public constructor(private taskService: TaskService) {
+    //
+  }
+
+  public ngOnInit() {
+    this.taskService.list().subscribe(
+      tasks => this.tasks = tasks,
+      error => console.log(error)
+    );
   }
 
 }
