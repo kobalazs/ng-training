@@ -1,23 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/shared/services/api.service';
 import { TaskDto } from '../dtos/task.dto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService {
-
-  public constructor(private http: HttpClient) {
-    //
-  }
+export class TaskService extends ApiService {
 
   public list(): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(
-      environment.apiEndpoint + '/task'
-    );
+    return this.request<TaskDto[]>('GET', 'task');
   }
 
 }
