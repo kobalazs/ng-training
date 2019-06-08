@@ -9,6 +9,10 @@ import { TaskDto } from '../dtos/task.dto';
 })
 export class TaskService extends ApiService {
 
+  public create(task: TaskDto): Observable<TaskDto> {
+    return this.request<TaskDto>('POST', 'task', task);
+  }
+
   public list(): Observable<TaskDto[]> {
     return this.request<TaskDto[]>('GET', 'task');
   }
