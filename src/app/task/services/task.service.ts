@@ -13,6 +13,10 @@ export class TaskService extends ApiService {
     return this.request<TaskDto>('POST', 'task', task);
   }
 
+  public update(task: TaskDto): Observable<TaskDto> {
+    return this.request('PATCH', 'task/' + task.id, task);
+  }
+
   public list(): Observable<TaskDto[]> {
     return this.request<TaskDto[]>('GET', 'task');
   }
