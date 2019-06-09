@@ -31,17 +31,6 @@ export class TaskListComponent implements OnInit {
     );
   }
 
-  public updateTask(task: TaskDto) {
-    this.loading = true;
-    this.taskService.update(task).subscribe(
-      updatedTask => {
-        task = updatedTask;
-        this.loading = false;
-      },
-      error => this.loadTasks()
-    );
-  }
-
   private loadTasks() {
     this.loading = true;
     this.taskService.list().subscribe(
