@@ -13,6 +13,7 @@ export class TaskListItemComponent implements OnInit {
   public loading: boolean;
   @Input() public task: TaskDto;
   @Input() public disabled: boolean;
+  @Output() public delete = new EventEmitter<TaskDto>();
   @Output() public error = new EventEmitter();
 
   public constructor(private taskService: TaskService) {
@@ -36,5 +37,23 @@ export class TaskListItemComponent implements OnInit {
       }
     );
   }
+
+  public deleteTask(task: TaskDto) {
+    if (!window.confirm(`Are you sure to delete "${task.name}"?`)) {
+      return;
+    }
+    this.loading = true;
+    this.taskService.delete(task).subscribe(
+      () => {
+        this.delete.emit(task);
+        this.loading = false;
+      },
+      error => {
+        this.error.emit();
+        this.loading = false;
+      }
+    );
+  }
+
 
 }
