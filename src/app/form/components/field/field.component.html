@@ -1,3 +1,4 @@
-<p>
-  field works!
-</p>
+<label>
+  {{field.label}}
+  <input type="text" class="form-control form-control-sm" name="{{field.name}}" [(ngModel)]="field.model">
+</label>

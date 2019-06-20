@@ -7,5 +7,4 @@ export class Form {
   public onSubmit: () => void;
   public onReset: () => void;
   public validator: (formGroup: FormGroup) => null | any;
-
 }
