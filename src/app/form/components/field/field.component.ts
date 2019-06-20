@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Field } from '../../models/field';
 
 @Component({
   selector: 'app-field',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldComponent implements OnInit {
 
-  constructor() { }
+  @Input() public field: Field;
+  @Output() public fieldChange = new EventEmitter<Field>();
+
+  constructor() {
+    //
+  }
 
   ngOnInit() {
+    //
   }
 
 }

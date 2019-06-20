@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { Form } from '../../models/form';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  @Input() public form: Form;
+  @Output() public changeForm = new EventEmitter<Form>();
+  @Output() public submitForm = new EventEmitter<Form>();
+  @Output() public resetForm = new EventEmitter<Form>();
+
+  constructor() {
+    //
+  }
 
   ngOnInit() {
+    //
   }
 
 }
