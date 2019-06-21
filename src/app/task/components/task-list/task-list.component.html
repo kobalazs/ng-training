@@ -3,10 +3,13 @@
   <img *ngIf="loading" src="assets/loader.gif">
 </h3>
 <ul>
-  <li *ngFor="let task of tasks">
+  <li *ngFor="let task of tasks; let first = first; let last = last;">
     <app-task-list-item
       [task]="task"
       [disabled]="loading"
+      [first]="first"
+      [last]="last"
+      (move)="moveTask($event)"
       (delete)="removeTask($event)"
       (error)="loadTasks()"
     ></app-task-list-item>

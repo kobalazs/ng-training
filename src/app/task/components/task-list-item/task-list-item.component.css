@@ -1,6 +1,13 @@
 input[type=text] {
     margin: 0 12px;
 }
-button {
+input.colorPicker {
+    border-radius: 13px;
+    border-width: 0;
+    cursor: pointer;
+    margin-right: 12px;
+    width: 26px;
+}
+:host > button {
     margin-right: 12px;
 }

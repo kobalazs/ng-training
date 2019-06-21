@@ -1,5 +1,19 @@
 <input type="checkbox" [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled">
 <input type="text" [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading || disabled">
+
+<div class="btn-group">
+  <button class="btn btn-sm btn-secondary" (click)="moveUp(task)" [disabled]="first">&#8679;</button>
+  <button class="btn btn-sm btn-secondary" (click)="moveDown(task)" [disabled]="last">&#8681;</button>
+</div>
+<input type="text" [(ngModel)]="task.position" (blur)="updateTask(task)" [disabled]="loading || disabled">
+
+<input
+  class="colorPicker"
+  [colorPicker]="task.color"
+  (colorPickerChange)="task.color = $event; updateTask(task)"
+  [style.background]="task.color"
+>
+
 <button class="btn btn-danger btn-sm" (click)="deleteTask(task)" [disabled]="loading || disabled">Delete</button>
 <span class="small">{{task.created_at | age:now}} minutes</span>
 <img *ngIf="loading" src="assets/loader.gif">

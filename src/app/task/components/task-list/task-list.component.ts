@@ -36,6 +36,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.list().subscribe(
       tasks => {
         this.tasks = tasks;
+        this.reindexTasks();
         this.loading = false;
       },
       error => {
@@ -47,6 +48,21 @@ export class TaskListComponent implements OnInit {
 
   public removeTask(removableTask: TaskDto) {
     this.tasks = this.tasks.filter(task => task !== removableTask);
+    this.reindexTasks();
+  }
+
+  public moveTask([movableTask, direction]: [TaskDto, number]) {
+    const movableTaskIdx = movableTask.position;
+    const otherTaskIdx = movableTaskIdx + direction;
+    this.tasks[movableTaskIdx] = Object.assign({}, this.tasks[otherTaskIdx]);
+    this.tasks[otherTaskIdx] = Object.assign({}, movableTask);
+    this.reindexTasks();
+  }
+
+  protected reindexTasks() {
+    for (const i of Object.keys(this.tasks)) {
+      this.tasks[i].position = parseInt(i, 10);
+    }
   }
 
 }

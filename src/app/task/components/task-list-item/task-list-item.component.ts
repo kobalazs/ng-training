@@ -13,6 +13,9 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
   public loading: boolean;
   @Input() public task: TaskDto;
   @Input() public disabled: boolean;
+  @Input() public first: boolean;
+  @Input() public last: boolean;
+  @Output() public move = new EventEmitter<[TaskDto, number]>();
   @Output() public delete = new EventEmitter<TaskDto>();
   @Output() public error = new EventEmitter();
   private timekeeper: number;
@@ -63,5 +66,11 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
     );
   }
 
+  public moveUp(task: TaskDto) {
+    this.move.emit([task, -1]);
+  }
 
+  public moveDown(task: TaskDto) {
+    this.move.emit([task, +1]);
+  }
 }

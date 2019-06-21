@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { TaskRoutingModule } from './task-routing.module';
 import { TaskListComponent } from './components/task-list/task-list.component';
@@ -12,6 +13,7 @@ import { AgePipe } from './pipes/age.pipe';
   imports: [
     CommonModule,
     FormsModule,
+    ColorPickerModule,
     TaskRoutingModule
   ]
 })
