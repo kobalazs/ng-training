@@ -1,6 +1,7 @@
-input[type=text] {
-    margin: 0 12px;
-}
-button {
+.mat-checkbox, .mat-form-field, .mat-button {
     margin-right: 12px;
+}
+.mat-spinner {
+    display: inline-block;
+    margin-left: 12px;
 }
