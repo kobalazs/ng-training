@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Task name</th>
+    <th>Color</th>
+    <th>Created at</th>
+  </tr>
+  <tr *ngFor="let task of tasks">
+    <td>{{task.id}}</td>
+    <td>{{task.name}}</td>
+    <td [style.backgroundColor]="task.color"></td>
+    <td>{{task.created_at|date}}</td>
+  </tr>
+</table>
