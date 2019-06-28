@@ -1,0 +1,5 @@
+<p>
+  Child basket: {{childBasket}}
+</p>
+<button (click)="changeApples()">Change apples from child!</button>
+<app-grandchild [grandchildBasket]="childBasket" (grandchildBasketChange)="childBasket=$event;childBasketChange.emit($event);"></app-grandchild>

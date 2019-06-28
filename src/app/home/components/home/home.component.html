@@ -1,3 +1,6 @@
 <p>
-  home works!
+  Home basket: {{homeBasket}}
 </p>
+<button (click)="changeApples()">Change apples from home!</button>
+<!-- <app-child [childBasket]="homeBasket" (childBasketChange)="homeBasket = $event;"></app-child> -->
+<app-child [(childBasket)]="homeBasket"></app-child>
