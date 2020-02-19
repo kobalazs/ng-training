@@ -1,7 +1,8 @@
 import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
@@ -20,6 +21,15 @@ export class ApiInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((errorResponse: HttpErrorResponse) => {
+        const message = errorResponse?.error?.error;
+        if (['token_expired', 'token_invalid', 'token_not_provided'].indexOf(message) !== -1) {
+          this.authService.logout();
+        }
+        window.alert(message ?? 'Unexpected system error.');
+        return throwError(errorResponse);
+      })
+    );
   }
 }
