@@ -7,6 +7,6 @@
 </button>
 <ul>
   <li *ngFor="let task of tasks">
-    <app-task-list-item [task]="task" (error)="loadTasks()"></app-task-list-item>
+    <app-task-list-item [task]="task" [disabled]="loading" (error)="loadTasks()"></app-task-list-item>
   </li>
 </ul>

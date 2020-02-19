@@ -12,6 +12,7 @@ export class TaskListItemComponent implements OnInit {
 
   public loading: boolean;
   @Input() public task: TaskDto;
+  @Input() public disabled: boolean;
   @Output() public error = new EventEmitter();
 
   public constructor(private taskService: TaskService) {
