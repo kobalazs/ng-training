@@ -22,6 +22,10 @@ export class TaskService {
     return this.http.patch<TaskDto>(`${environment.apiEndpoint}/task/${task.id}`, task);
   }
 
+  public delete(task: TaskDto): Observable<void> {
+    return this.http.delete<void>(`${environment.apiEndpoint}/task/${task.id}`);
+  }
+
   public list(): Observable<TaskDto[]> {
     return this.http.get<TaskDto[]>(`${environment.apiEndpoint}/task`);
   }

@@ -31,6 +31,10 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  public removeTask(removableTask: TaskDto) {
+    this.tasks = this.tasks.filter(task => task !== removableTask);
+  }
+
   private loadTasks() {
     this.loading = true;
     this.taskService.list().subscribe(
