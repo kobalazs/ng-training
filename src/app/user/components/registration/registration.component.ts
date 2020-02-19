@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UserService } from '../../services/user.service';
+import { UserDto } from '../../dtos/user.dto';
 
 @Component({
   selector: 'app-registration',
@@ -29,7 +30,17 @@ export class RegistrationComponent implements OnInit {
   }
 
   public register() {
-    this.userService.register(this.form.value);
+    this.userService.register(this.form.value).subscribe(
+      (user: UserDto) => {
+        console.log(user);
+        window.alert('Successful registration!');
+        this.form.reset();
+      },
+      (error: any) => {
+        console.log(error);
+        window.alert('Registration failed.');
+      }
+    );
   }
      
   private passwordMatchValidator(g: FormGroup) {

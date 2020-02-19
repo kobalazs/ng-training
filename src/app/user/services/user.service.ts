@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { UserDto } from '../dtos/user.dto';
 
 @Injectable({
@@ -7,9 +10,14 @@ import { UserDto } from '../dtos/user.dto';
 })
 export class UserService {
 
-  constructor() { }
+  public constructor(private http: HttpClient) {
+    //
+  }
 
-  public register(userDto: UserDto) {
-    console.log('Register user:', userDto);
+  public register(user: UserDto): Observable<UserDto> {
+    return this.http.post<UserDto>(
+      environment.apiEndpoint + '/user/register',
+      user
+    );
   }
 }

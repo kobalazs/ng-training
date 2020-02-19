@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiEndpoint: 'http://ng-training-backend.braininghub.stylers.ninja/api'
 };
