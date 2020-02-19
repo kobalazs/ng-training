@@ -11,6 +11,7 @@ import { TaskService } from '../../services/task.service';
 export class TaskListComponent implements OnInit {
 
   public tasks: TaskDto[] = [];
+  public loading = false;
 
   public constructor(private taskService: TaskService) {
     //
@@ -21,24 +22,34 @@ export class TaskListComponent implements OnInit {
   }
 
   public addNewTask() {
+    this.loading = true;
     const task = new TaskDto();
     task.name = 'New Task';
     this.taskService.create(task).subscribe(
-      () => this.loadTasks()
+      () => this.loadTasks(),
+      () => this.loading = false
     );
   }
 
   public updateTask(task: TaskDto) {
+    this.loading = true;
     this.taskService.update(task).subscribe(
-      updatedTask => task = updatedTask,
-      error => this.loadTasks()
+      updatedTask => {
+        task = updatedTask;
+        this.loading = false;
+      },
+      () => this.loadTasks()
     );
   }
 
   private loadTasks() {
+    this.loading = true;
     this.taskService.list().subscribe(
-      tasks => this.tasks = tasks,
-      error => console.log(error)
+      tasks => {
+        this.tasks = tasks;
+        this.loading = false;
+      },
+      () => this.loading = false
     );
   }
 }
