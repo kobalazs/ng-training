@@ -4,6 +4,9 @@
     <li class="nav-item" [routerLinkActive]="['active']">
       <a class="nav-link" [routerLink]="['/home']">Home</a>
     </li>
+    <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link" [routerLink]="['/task/list']">Tasks</a>
+    </li>
   </ul>
   <ul class="navbar-nav ml-auto" *ngIf="!authService.user">
     <li class="nav-item" [routerLinkActive]="['active']">
