@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService, AuthResponse } from 'src/app/shared/services/auth.service';
 
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
       }
     );
 
-  public constructor(private authService: AuthService) {
+  public constructor(private authService: AuthService, private router: Router) {
     //
   }
 
@@ -28,9 +29,8 @@ export class LoginComponent implements OnInit {
   public login() {
     this.authService.login(this.form.value).subscribe(
       (response: AuthResponse) => {
-        console.log(response);
-        window.alert('Successful login!');
         this.form.reset();
+        this.router.navigate(['/']);
       },
       (error: any) => {
         console.log(error);
