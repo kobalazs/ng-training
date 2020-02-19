@@ -18,6 +18,10 @@ export class TaskService {
     return this.http.post<TaskDto>(`${environment.apiEndpoint}/task`, task);
   }
 
+  public update(task: TaskDto): Observable<TaskDto> {
+    return this.http.patch<TaskDto>(`${environment.apiEndpoint}/task/${task.id}`, task);
+  }
+
   public list(): Observable<TaskDto[]> {
     return this.http.get<TaskDto[]>(`${environment.apiEndpoint}/task`);
   }
