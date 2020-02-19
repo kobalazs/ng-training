@@ -35,7 +35,7 @@ export class TaskListComponent implements OnInit {
     this.tasks = this.tasks.filter(task => task !== removableTask);
   }
 
-  private loadTasks() {
+  public loadTasks() {
     this.loading = true;
     this.taskService.list().subscribe(
       tasks => {
