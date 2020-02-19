@@ -1,4 +1,5 @@
 <h3>My Tasks</h3>
+<button type="button" class="btn btn-primary" (click)="addNewTask()">Add New Task</button>
 <ul>
   <li *ngFor="let task of tasks">{{task.name}}</li>
 </ul>

@@ -14,9 +14,11 @@ export class TaskService {
     //
   }
 
+  public create(task: TaskDto): Observable<TaskDto> {
+    return this.http.post<TaskDto>(`${environment.apiEndpoint}/task`, task);
+  }
+
   public list(): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(
-      environment.apiEndpoint + '/task'
-    );
+    return this.http.get<TaskDto[]>(`${environment.apiEndpoint}/task`);
   }
 }

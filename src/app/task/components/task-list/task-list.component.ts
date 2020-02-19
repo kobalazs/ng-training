@@ -15,8 +15,20 @@ export class TaskListComponent implements OnInit {
   public constructor(private taskService: TaskService) {
     //
   }
- 
+
   public ngOnInit(): void {
+    this.loadTasks();
+  }
+
+  public addNewTask() {
+    const task = new TaskDto();
+    task.name = 'New Task';
+    this.taskService.create(task).subscribe(
+      () => this.loadTasks()
+    );
+  }
+
+  private loadTasks() {
     this.taskService.list().subscribe(
       tasks => this.tasks = tasks,
       error => console.log(error)
