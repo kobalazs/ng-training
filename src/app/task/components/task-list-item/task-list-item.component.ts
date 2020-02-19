@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 
 import { TaskDto } from '../../dtos/task.dto';
 import { TaskService } from '../../services/task.service';
@@ -8,20 +8,28 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './task-list-item.component.html',
   styleUrls: ['./task-list-item.component.css']
 })
-export class TaskListItemComponent implements OnInit {
+export class TaskListItemComponent implements OnInit, OnDestroy {
 
   public loading: boolean;
   @Input() public task: TaskDto;
   @Input() public disabled: boolean;
   @Output() public delete = new EventEmitter<TaskDto>();
   @Output() public error = new EventEmitter();
+  private timekeeper: number;
+  public now: number = Date.now();
 
   public constructor(private taskService: TaskService) {
     //
   }
 
   public ngOnInit(): void {
-    //
+    this.timekeeper = window.setInterval(() => {
+      this.now = Date.now();
+    }, 1000);
+  }
+
+  public ngOnDestroy(): void {
+    window.clearInterval(this.timekeeper);
   }
 
   public updateTask(task: TaskDto) {
