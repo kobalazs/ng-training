@@ -31,6 +31,6 @@
   <div *ngIf="!form.valid && !form.pristine" class="alert alert-warning">
     All fields should be filled and passwords should be matching values!
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Register</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loading">Register</button>
   <button type="reset" class="btn btn-default">Reset</button>
 </form>
